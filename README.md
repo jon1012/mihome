@@ -24,10 +24,10 @@ def push_data(client, model, sid, cmd, data):
                              prop=key)
       client.publish(path, payload=value, qos=0)
 
-  client = prepare_mqtt()
-  cb = lambda m, s, c, d: push_data(client, m, s, c, d)
-  connector = XiaomiConnector(data_callback=cb)
+client = prepare_mqtt()
+cb = lambda m, s, c, d: push_data(client, m, s, c, d)
+connector = XiaomiConnector(data_callback=cb)
 
-  while True:
-      connector.check_incoming()
+while True:
+    connector.check_incoming()
 ```
