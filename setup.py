@@ -4,7 +4,7 @@ import sys, os
 version = '0.1'
 
 def readme():
-    with open('README.rst') as f:
+    with open('README.md') as f:
         return f.read()
 
 setup(name='mihome',
@@ -12,6 +12,7 @@ setup(name='mihome',
       description="Xiaomi Mi Home Python bindings",
       long_description=readme(),
       classifiers=[
+          "Development Status :: 4 - Beta",
           "License :: OSI Approved :: MIT License",
           "Programming Language :: Python :: 2",
           "Programming Language :: Python :: 3",
