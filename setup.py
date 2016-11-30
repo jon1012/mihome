@@ -3,11 +3,14 @@ import sys, os
 
 version = '0.1'
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 setup(name='mihome',
       version=version,
       description="Xiaomi Mi Home Python bindings",
-      long_description="""\
-A library to receive paquets, events and to control the Xiaomi Mi Home hub and other devices""",
+      long_description=readme(),
       classifiers=[
           "License :: OSI Approved :: MIT License",
           "Programming Language :: Python :: 2",
@@ -19,7 +22,8 @@ A library to receive paquets, events and to control the Xiaomi Mi Home hub and o
       keywords='xiaomi udp paquet iot mi home aqara',
       author='Jonathan Schemoul',
       author_email='jonathan.schemoul@gmail.com',
-      url='https://notes.jmsinfor.com/blog/post/admin/Xiaomi-Hub',
+      #url='https://notes.jmsinfor.com/blog/post/admin/Xiaomi-Hub',
+      url='https://github.com/jon1012/mihome',
       license='MIT',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,

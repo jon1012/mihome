@@ -1,4 +1,5 @@
-Library to use the Xiaomi Mi Home zigbee hub.
+Library to use the Xiaomi Mi Home zigbee hub (receive paquets, events for now).
+
 
 Example of usage as a simple mqtt relay:
 
@@ -31,3 +32,5 @@ connector = XiaomiConnector(data_callback=cb)
 while True:
     connector.check_incoming()
 ```
+
+For more information on the protocol and devices, see my notes: https://notes.jmsinfor.com/blog/post/admin/Xiaomi-Hub
