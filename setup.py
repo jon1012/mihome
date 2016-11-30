@@ -19,6 +19,7 @@ A library to receive paquets, events and to control the Xiaomi Mi Home hub and o
       zip_safe=False,
       install_requires=[
           # -*- Extra requirements: -*-
+          "future"
       ],
       entry_points="""
       # -*- Entry points: -*-

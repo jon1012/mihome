@@ -1,7 +1,9 @@
+from past.builtins import basestring
 import socket
 import binascii
 import struct
 import json
+
 
 class XiaomiConnector:
     """Connector for the Xiaomi Mi Hub and devices on multicast."""
@@ -52,7 +54,7 @@ class XiaomiConnector:
         """Handle an incoming payload, save related data if needed,
         and use the callback if there is one.
         """
-        if isinstance(payload.get('data', None), str):
+        if isinstance(payload.get('data', None), basestring):
             cmd = payload["cmd"]
             if cmd in ["heartbeat", "report", "read_ack"]:
                 if self.data_callback is not None:
