@@ -1,7 +1,8 @@
+__author__ = 'lxl'
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from mihome import *
+from connector import *
 import ConfigParser
 import paho.mqtt.client as mqtt
 import json
@@ -13,6 +14,7 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 subscribed_channels = set()
+published_channels = set()
 
 IV = bytearray([0x17, 0x99, 0x6d, 0x09, 0x3d, 0x28, 0xdd, 0xb3, 0xba, 0x69, 0x5a, 0x2e, 0x6f, 0x58, 0x56, 0x2e])
 
@@ -82,7 +84,11 @@ def push_data(client, model, sid, cmd, data, id2name, PATH_FMT):
                              sid=sid,
                              cmd=cmd,
                              prop=key)
+
         client.publish(path, payload=value.upper(), qos=0)
+        if path not in published_channels:
+            print "Published to: ", path
+            published_channels.add(path)
 
         if model in ['plug', 'ctrl_neutral2', 'ctrl_neutral1']:
             if path in subscribed_channels:
@@ -110,14 +116,14 @@ def ConfigSectionMap(Config, section):
 if __name__ == "__main__":
     id2name = dict()
     Config = ConfigParser.ConfigParser()
-    Config.read("mihome_mqtt.ini")
+    Config.read("mihome_listen.ini")
     MQTT_SERVER = ConfigSectionMap(Config, "MQTT")['server']
     MQTT_PORT = ConfigSectionMap(Config, "MQTT")['port']
     PATH_FMT =  ConfigSectionMap(Config, "MQTT")['mqtt_path']
     devices = ConfigSectionMap(Config, "devices")['sub_devices']
 
     user_key = Config._sections['user_key']
-    data = json.loads(devices.decode('gbk'))
+    data = json.loads(devices.decode('utf-8'))
     for i in data:
         id2name[i['did'].split('.')[1]] = i['name']
     client = prepare_mqtt(MQTT_SERVER, MQTT_PORT)

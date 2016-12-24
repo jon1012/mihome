@@ -1,4 +1,4 @@
-from past.builtins import basestring
+#from past.builtins import basestring
 import socket
 import struct
 import json
@@ -94,10 +94,10 @@ class XiaomiConnector:
         #self.socket.sendto(json.dumps(data).encode("utf-8"), (addr, self.MULTICAST_PORT))
         if type(data) is dict:
             self.socket.sendto(json.dumps(data).encode("utf-8"), (addr, port))
-            print "SEND dATA:", json.dumps(data).encode("utf-8")
+            #print "SEND dATA:", json.dumps(data).encode("utf-8")
         else:
             self.socket.sendto(data.encode("utf-8"), (addr, port))
-            print "SEND dATA:", data.encode("utf-8")
+            #print "SEND dATA:", data.encode("utf-8")
     def get_nodes(self):
         """Return the current discovered node configuration."""
         return self.nodes
@@ -164,7 +164,7 @@ class XiaomiConnector:
                         self.last_tokens[payload["sid"]] = payload['token']
 
                     print addr, ": ", payload
-                    print "NODES:", self.gnodes
+                    #print "NODES:", self.gnodes
                     break
 
         for sid in self.gnodes:
@@ -194,7 +194,7 @@ class XiaomiConnector:
                             except KeyError, e:
                                 print "KeyError", e
                             print addr, ": ", payload
-                            print "NODES:", len(self.nodes), self.nodes
+                            #print "NODES:", len(self.nodes), self.nodes
                             break
         self.nodes.update(self.gnodes)
         #print "Final:", len(self.nodes)
